@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-vue-next",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vue CLI plugin for trying out vue-next (experimental)",
   "main": "index.js",
   "repository": {
