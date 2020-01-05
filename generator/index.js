@@ -8,8 +8,7 @@ module.exports = (api) => {
     }
   })
 
-  // TODO: transformScript main.js
-  api.render('./template')
+  api.transformScript(api.entryFile, require('./codemods/rfc09-global-api'))
 
   // TODO: uninstall vue-template-compiler (need to fix @vue/cli-service first)
 }

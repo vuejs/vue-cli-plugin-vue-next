@@ -9,11 +9,19 @@
   },
   "author": "Haoqun Jiang",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "vue-loader": "^16.0.0-alpha.1"
   },
   "peerDependencies": {
     "@vue/compiler-sfc": "^3.0.0-alpha.1",
     "vue": "^3.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "jscodeshift": "^0.7.0",
+    "prettier": "^1.19.1"
   }
 }
