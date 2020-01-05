@@ -10,10 +10,10 @@
   "author": "Haoqun Jiang",
   "license": "MIT",
   "dependencies": {
-    "vue-loader": "^16.0.0-alpha.0"
+    "vue-loader": "^16.0.0-alpha.1"
   },
   "peerDependencies": {
-    "@vue/compiler-sfc": "^3.0.0-alpha.0",
-    "vue": "^3.0.0-alpha.0"
+    "@vue/compiler-sfc": "^3.0.0-alpha.1",
+    "vue": "^3.0.0-alpha.1"
   }
 }
