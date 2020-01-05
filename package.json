@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sodatea/vue-cli-plugin-vue-next.git"
+    "url": "https://github.com/vuejs/vue-cli-plugin-vue-next.git"
   },
   "author": "Haoqun Jiang",
   "license": "MIT",
