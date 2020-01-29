@@ -26,10 +26,10 @@ module.exports = function transformMount(j, root) {
 
     return j.callExpression(
       j.memberExpression(
-        j.callExpression(j.identifier('createApp'), []),
+        j.callExpression(j.identifier('createApp'), [options]),
         j.identifier('mount')
       ),
-      [options, el]
+      [el]
     )
   })
 
