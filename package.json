@@ -16,8 +16,8 @@
     "vue-loader": "^16.0.0-alpha.1"
   },
   "peerDependencies": {
-    "@vue/compiler-sfc": "^3.0.0-alpha.1",
-    "vue": "^3.0.0-alpha.1"
+    "@vue/compiler-sfc": "^3.0.0-alpha.4",
+    "vue": "^3.0.0-alpha.4"
   },
   "devDependencies": {
     "jest": "^24.9.0",
