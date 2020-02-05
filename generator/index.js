@@ -1,10 +1,10 @@
 module.exports = (api) => {
   api.extendPackage({
     dependencies: {
-      vue: '^3.0.0-alpha.1'
+      vue: '^3.0.0-alpha.4'
     },
     devDependencies: {
-      '@vue/compiler-sfc': '^3.0.0-alpha.1'
+      '@vue/compiler-sfc': '^3.0.0-alpha.4'
     }
   })
 
