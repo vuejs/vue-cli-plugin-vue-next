@@ -13,6 +13,42 @@ module.exports = (api) => {
     prune: true
   })
 
+  if (api.hasPlugin('eslint')) {
+    api.extendPackage({
+      devDependencies: {
+        'eslint-plugin-vue': '^7.0.0-alpha.0'
+      }
+    })
+
+    // `plugin:vue/essential` -> `plugin:vue/vue3-essential`, etc.
+    const updateConfig = cfg =>
+      cfg.replace(
+        /plugin:vue\/(essential|recommended|strongly-recommended)/gi,
+        'plugin:vue/vue3-$1'
+      )
+
+    // if the config is placed in `package.json`
+    const eslintConfigInPkg = api.generator.pkg.eslintConfig
+    if (eslintConfigInPkg && eslintConfigInPkg.extends) {
+      eslintConfigInPkg.extends = eslintConfigInPkg.extends.map(cfg => updateConfig(cfg))
+    }
+    // if the config has been extracted to a standalone file
+    api.render((files) => {
+      for (const filename of [
+        '.eslintrc.js',
+        '.eslintrc.cjs',
+        '.eslintrc.yaml',
+        '.eslintrc.yml',
+        '.eslinrc.json',
+        '.eslintrc'
+      ]) {
+        if (files[filename]) {
+          files[filename] = updateConfig(files[filename])
+        }
+      }
+    })
+  }
+
   if (api.hasPlugin('vuex') || api.generator.pkg.dependencies['vuex']) {
     api.extendPackage({
       dependencies: {
