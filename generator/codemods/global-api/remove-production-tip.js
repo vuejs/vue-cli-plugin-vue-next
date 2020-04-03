@@ -1,4 +1,4 @@
-module.exports = function removeProductionTip(j, root) {
+module.exports = function removeProductionTip({ j, root }) {
   const productionTipAssignment = root.find(
     j.AssignmentExpression,
     n =>
@@ -8,6 +8,4 @@ module.exports = function removeProductionTip(j, root) {
       n.left.object.object.name === 'Vue'
   )
   productionTipAssignment.remove()
-
-  return root
 }

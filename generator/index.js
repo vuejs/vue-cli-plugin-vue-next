@@ -93,5 +93,5 @@ module.exports = (api) => {
     // * Partial support of per-component navigation guards. No `beforeRouteEnter`
   }
 
-  api.transformScript(api.entryFile, require('./codemods/rfc09-global-api'))
+  api.transformScript(api.entryFile, require('./codemods/global-api'))
 }

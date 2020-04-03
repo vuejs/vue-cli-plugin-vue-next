@@ -1,4 +1,6 @@
-module.exports = function transformMount(j, root) {
+module.exports = function createAppMount(context) {
+  const { j, root } = context
+
   // new Vue(...).$mount()
   const mountCalls = root.find(j.CallExpression, n => {
     return (
@@ -22,6 +24,17 @@ module.exports = function transformMount(j, root) {
       options.properties[0].value.body.type === 'CallExpression'
     ) {
       options = options.properties[0].value.body.arguments[0]
+    } else {
+      // replace `render: h => h(App)` with `render: () => h(App)
+      // and add an `h` import
+      const renderFn = options.properties.find(p => p.key.name === 'render' && p.value.type === 'ArrowFunctionExpression')
+      if (renderFn) {
+        const addImport = require('./utilities/add-import')
+        addImport(context, { imported: 'h' }, 'vue')
+
+        // remove the `h` parameter
+        renderFn.value.params.shift()
+      }
     }
 
     return j.callExpression(
@@ -32,6 +45,4 @@ module.exports = function transformMount(j, root) {
       [el]
     )
   })
-
-  return root
 }
