@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 module.exports = (api) => {
   api.extendPackage({
     dependencies: {
@@ -93,5 +95,29 @@ module.exports = (api) => {
     // * Partial support of per-component navigation guards. No `beforeRouteEnter`
   }
 
-  api.transformScript(api.entryFile, require('./codemods/global-api'))
+  const globalApiTransform = require('./codemods/global-api')
+  api.transformScript(api.entryFile, globalApiTransform)
+
+  const resolveFile = (file) => {
+    let filePath = api.resolve(file)
+    if (fs.existsSync(filePath)) return filePath
+    filePath = api.resolve(file.replace('.js', '.ts'))
+    if (fs.existsSync(filePath)) return filePath
+    filePath = api.resolve(path.join(file.replace('.js', ''), 'index.js'))
+    if (fs.existsSync(filePath)) return filePath
+    filePath = api.resolve(path.join(file.replace('.js', ''), 'index.ts'))
+    if (fs.existsSync(filePath)) return filePath
+  }
+  
+  const routerPath = resolveFile('router')
+  if (routerPath) {
+    api.transformScript(routerPath, globalApiTransform)
+    api.transformScript(routerPath, require('./codemods/router'))
+  }
+
+  const storePath = resolveFile('store')
+  if (storePath) {
+    api.transformScript(storePath, globalApiTransform)
+    api.transformScript(storePath, require('./codemods/vuex'))
+  }
 }
