@@ -1,13 +1,12 @@
 const addImport = require('../utils/add-import')
 const removeExtraneousImport = require('../utils/remove-extraneous-import')
 
+// new Store() -> createStore()
 /** @type {import('jscodeshift').Transform} */
 module.exports = function(fileInfo, api) {
   const j = api.jscodeshift
   const root = j(fileInfo.source)
   const context = { j, root }
-
-  // TODO: new Store() -> createStore()
 
   const vuexImportDecls = root.find(j.ImportDeclaration, {
     source: {
