@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
 
 const store = createStore({
   state () {
@@ -6,6 +6,6 @@ const store = createStore({
       count: 1
     }
   }
-})
+});
 
-export default store
+export default store;
