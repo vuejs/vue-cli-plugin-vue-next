@@ -1,6 +1,6 @@
 /**
  * It is expected to be run after the `createApp` transformataion
- * if a root component is trivial, that is, it contains only one simple option,
+ * if a root component is trivial, that is, it contains only one simple prop,
  * like `{ render: h => h(App) }`, then just use the `App` variable
  * 
  * TODO: implement `remove-trivial-render`,

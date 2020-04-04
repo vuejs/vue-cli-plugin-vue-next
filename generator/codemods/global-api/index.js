@@ -5,8 +5,8 @@ module.exports = function(fileInfo, api) {
   const context = { j, root }
 
   require('./create-app-mount')(context)
-  require('./root-option-to-use')(context, 'store')
-  require('./root-option-to-use')(context, 'router')
+  require('./root-prop-to-use')(context, 'store')
+  require('./root-prop-to-use')(context, 'router')
   require('./remove-trivial-root')(context)
   require('./remove-production-tip')(context)
   require('./remove-vue-use')(context)

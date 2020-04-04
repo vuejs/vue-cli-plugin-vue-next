@@ -5,7 +5,7 @@
  * @param {import('jscodeshift').JSCodeshift} context.j
  * @param {ReturnType<import('jscodeshift').Core>} context.root
  */
-module.exports = function rootOptionToUse(context, rootOptionName) {
+module.exports = function rootPropToUse(context, rootPropName) {
   const { j, root } = context
 
   const appRoots = root.find(j.CallExpression, {
@@ -13,22 +13,22 @@ module.exports = function rootOptionToUse(context, rootOptionName) {
     arguments: args =>
       args.length === 1 &&
       args[0].type === 'ObjectExpression' &&
-      args[0].properties.find(p => p.key.name === rootOptionName)
+      args[0].properties.find(p => p.key.name === rootPropName)
   })
 
   appRoots.replaceWith(({ node: createAppCall }) => {
-    const rootOptions = createAppCall.arguments[0]
-    const propertyIndex = rootOptions.properties.findIndex(
-      p => p.key.name === rootOptionName
+    const rootProps = createAppCall.arguments[0]
+    const propertyIndex = rootProps.properties.findIndex(
+      p => p.key.name === rootPropName
     )
-    const [{ value: pluginInstance }] = rootOptions.properties.splice(
+    const [{ value: pluginInstance }] = rootProps.properties.splice(
       propertyIndex,
       1
     )
 
     return j.callExpression(
       j.memberExpression(
-        j.callExpression(j.identifier('createApp'), [rootOptions]),
+        j.callExpression(j.identifier('createApp'), [rootProps]),
         j.identifier('use')
       ),
       [pluginInstance]

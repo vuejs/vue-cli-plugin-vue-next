@@ -24,12 +24,12 @@ module.exports = function createAppMount(context) {
   addImport(context, { imported: 'createApp' }, 'vue')
 
   mountCalls.replaceWith(({ node }) => {
-    let options = node.callee.object.arguments[0]
+    let rootProps = node.callee.object.arguments[0]
     const el = node.arguments[0]
 
     return j.callExpression(
       j.memberExpression(
-        j.callExpression(j.identifier('createApp'), [options]),
+        j.callExpression(j.identifier('createApp'), [rootProps]),
         j.identifier('mount')
       ),
       [el]
