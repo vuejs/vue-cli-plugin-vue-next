@@ -2,6 +2,9 @@
  * It is expected to be run after the `createApp` transformataion
  * if a root component is trivial, that is, it contains only one simple option,
  * like `{ render: h => h(App) }`, then just use the `App` variable
+ * 
+ * TODO: implement `remove-trivial-render`,
+ * move all other rootProps to the second argument of `createApp`
  * @param {Object} context
  * @param {import('jscodeshift').JSCodeshift} context.j
  * @param {ReturnType<import('jscodeshift').Core>} context.root
