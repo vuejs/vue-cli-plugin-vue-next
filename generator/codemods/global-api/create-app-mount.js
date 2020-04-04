@@ -16,6 +16,13 @@ module.exports = function createAppMount(context) {
     )
   })
 
+  if (!mountCalls.length) {
+    return
+  }
+
+  const addImport = require('../utils/add-import')
+  addImport(context, { imported: 'createApp' }, 'vue')
+
   mountCalls.replaceWith(({ node }) => {
     let options = node.callee.object.arguments[0]
     const el = node.arguments[0]

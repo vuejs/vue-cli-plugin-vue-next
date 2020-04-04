@@ -1,4 +1,4 @@
-const addImport = require('./utilities/add-import')
+const addImport = require('../utils/add-import')
 
 /**
  * replace `render: h => h(App)` with `render: () => h(App)
@@ -6,17 +6,17 @@ const addImport = require('./utilities/add-import')
  * @param {import('jscodeshift').JSCodeshift} context.j
  * @param {ReturnType<import('jscodeshift').Core>} context.root
  */
-module.exports = function removeContextualH (context) {
+module.exports = function removeContextualH(context) {
   const { j, root } = context
-  
-  const renderFns = (root.find(j.Property, {
+
+  const renderFns = root.find(j.Property, {
     key: {
       name: 'render'
     },
     value: {
       type: 'ArrowFunctionExpression'
     }
-  }))
+  })
   if (renderFns.length) {
     addImport(context, { imported: 'h' }, 'vue')
     renderFns.forEach(({ node }) => {
