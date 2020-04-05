@@ -36,7 +36,7 @@ module.exports = function addImport(context, specifier, source) {
     // add new specifier to the existing import declaration
     matchedDecl.get(0).node.specifiers.push(newImportSpecifier)
   } else {
-    const newImportDecl = j.ImportDeclaration(
+    const newImportDecl = j.importDeclaration(
       [newImportSpecifier],
       j.stringLiteral(source)
     )
