@@ -3,10 +3,10 @@ const fs = require('fs')
 module.exports = (api) => {
   api.extendPackage({
     dependencies: {
-      vue: '^3.0.0-alpha.9'
+      vue: '^3.0.0-alpha.10'
     },
     devDependencies: {
-      '@vue/compiler-sfc': '^3.0.0-alpha.9',
+      '@vue/compiler-sfc': '^3.0.0-alpha.10',
       // remove the vue-template-compiler
       'vue-template-compiler': null
     }
@@ -70,7 +70,7 @@ module.exports = (api) => {
   if (api.hasPlugin('router') || api.generator.pkg.dependencies['router']) {
     api.extendPackage({
       dependencies: {
-        'vue-router': '^4.0.0-alpha.3'
+        'vue-router': '^4.0.0-alpha.4'
       }
     })
 
