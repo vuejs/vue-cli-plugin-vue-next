@@ -31,38 +31,24 @@ module.exports = function(fileInfo, api) {
       node.arguments[0].properties = node.arguments[0].properties.map(p => {
         if (p.key.name === 'mode') {
           const mode = p.value.value
+          let initializer
           if (mode === 'hash') {
-            addImport(
-              context,
-              { imported: 'createWebHashHistory' },
-              'vue-router'
-            )
-            return j.property(
-              'init',
-              j.identifier('history'),
-              j.callExpression(j.identifier('createWebHashHistory'), [])
-            )
+            initializer = 'createWebHashHistory'
           } else if (mode === 'history') {
-            addImport(context, { imported: 'createWebHistory' }, 'vue-router')
-            return j.property(
-              'init',
-              j.identifier('history'),
-              j.callExpression(j.identifier('createWebHistory'), [])
-            )
+            initializer = 'createWebHistory'
           } else if (mode === 'abstract') {
-            addImport(
-              context,
-              { imported: 'createMemoryHistory' },
-              'vue-router'
-            )
-            return j.property(
-              'init',
-              j.identifier('history'),
-              j.callExpression(j.identifier('createMemoryHistory'), [])
-            )
+            initializer = 'createMemoryHistory'
           } else {
-            // TODO: warn
+            console.error(`mode must be one of 'hash', 'history', or 'abstract'`)
+            return p
           }
+
+          addImport(context, { imported: initializer }, 'vue-router')
+          return j.property(
+            'init',
+            j.identifier('history'),
+            j.callExpression(j.identifier(initializer), [])
+          )
         }
 
         return p
