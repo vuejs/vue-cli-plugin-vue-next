@@ -17,8 +17,12 @@ vue add vue-next
 
 - [x] Add Vue 3 alpha and `@vue/compiler-sfc` to the project dependencies.
 - [x] Configure webpack to compile `.vue` files with the new Vue 3 compiler.
-- [x] [A simple codemod](./generator/codemods/rfc09-global-api) that automatically migrates some global API changes mentioned in [RFC-0009](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0009-global-api-change.md).
+- [x] [Codemods](./generator/codemods/global-api) that automatically migrate some global API changes mentioned in [RFC-0009](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0009-global-api-change.md).
+- [x] Install Vuex 4.0 & Vue Router 4.0 in the project, if older versions of them are detected.
+- [x] Codemods for the API changes in Vuex and Vue Router.
 
 ## TODOs
 
 - [ ] More comprehensive codemods for breaking changes in Vue 3.
+- [ ] TypeScript support
+- [ ] Test utils support
