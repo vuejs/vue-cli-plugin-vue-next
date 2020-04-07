@@ -1,6 +1,5 @@
 import { createRouter } from 'vue-router';
 import Home from '../views/Home.vue';
-import About from '../views/About.vue';
 
 const routes = [
   {
@@ -17,7 +16,7 @@ const routes = [
 
 const router = createRouter({
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;
