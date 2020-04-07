@@ -4,10 +4,10 @@ const path = require('path')
 module.exports = (api) => {
   api.extendPackage({
     dependencies: {
-      vue: '^3.0.0-alpha.10'
+      vue: '^3.0.0-alpha.11'
     },
     devDependencies: {
-      '@vue/compiler-sfc': '^3.0.0-alpha.10',
+      '@vue/compiler-sfc': '^3.0.0-alpha.11',
       // remove the vue-template-compiler
       'vue-template-compiler': null
     }
