@@ -39,7 +39,9 @@ module.exports = function(fileInfo, api) {
           } else if (mode === 'abstract') {
             initializer = 'createMemoryHistory'
           } else {
-            console.error(`mode must be one of 'hash', 'history', or 'abstract'`)
+            console.error(
+              `mode must be one of 'hash', 'history', or 'abstract'`
+            )
             return p
           }
 
