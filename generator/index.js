@@ -60,7 +60,7 @@ module.exports = (api) => {
     })
 
     api.exitLog('Installed vuex 4.0.')
-    api.exitLog('Codemod not yet implemented, please follow the documentation at https://github.com/vuejs/vuex/tree/4.0')
+    api.exitLog('See the documentation at https://github.com/vuejs/vuex/tree/4.0')
 
     // Codemod TODOs:
     // * Remove `Vue.use(Vuex)`
@@ -76,7 +76,7 @@ module.exports = (api) => {
     })
 
     api.exitLog('Installed vue-router 4.0.')
-    api.exitLog('Codemod not yet implemented, please follow the documentation at https://github.com/vuejs/vue-router-next')
+    api.exitLog('See the documentation at https://github.com/vuejs/vue-router-next')
     
     // Codemod TODOs:
     // * Remove `Vue.use(VueRouter)`
