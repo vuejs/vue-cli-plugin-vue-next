@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 
 module.exports = (api) => {
   api.extendPackage({
@@ -99,23 +100,31 @@ module.exports = (api) => {
   api.transformScript(api.entryFile, globalApiTransform)
 
   const resolveFile = (file) => {
-    let filePath = api.resolve(file)
-    if (fs.existsSync(filePath)) return filePath
-    filePath = api.resolve(file.replace('.js', '.ts'))
-    if (fs.existsSync(filePath)) return filePath
-    filePath = api.resolve(path.join(file.replace('.js', ''), 'index.js'))
-    if (fs.existsSync(filePath)) return filePath
-    filePath = api.resolve(path.join(file.replace('.js', ''), 'index.ts'))
-    if (fs.existsSync(filePath)) return filePath
+    if (!/\.(j|t)s$/ig.test(file)) {
+      file += '.js'
+    }
+    let resolvedPath = api.resolve(file)
+    const possiblePaths = [
+      resolvedPath,
+      resolvedPath.replace(/\.js$/ig, '.ts'),
+      path.join(resolvedPath.replace(/\.js$/ig, ''), 'index.js'),
+      path.join(resolvedPath.replace(/\.js$/ig, ''), 'index.ts')
+    ]
+    for (const p of possiblePaths) {
+      if (fs.existsSync(p)) {
+        return path.relative(api.resolve('.'), p)
+      }
+    }
   }
   
-  const routerPath = resolveFile('router')
+  const routerPath = resolveFile('src/router')
+  console.log(routerPath)
   if (routerPath) {
     api.transformScript(routerPath, globalApiTransform)
     api.transformScript(routerPath, require('./codemods/router'))
   }
 
-  const storePath = resolveFile('store')
+  const storePath = resolveFile('src/store')
   if (storePath) {
     api.transformScript(storePath, globalApiTransform)
     api.transformScript(storePath, require('./codemods/vuex'))
