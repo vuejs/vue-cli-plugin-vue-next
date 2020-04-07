@@ -44,8 +44,7 @@ module.exports = function(fileInfo, api) {
           }
 
           addImport(context, { imported: initializer }, 'vue-router')
-          return j.property(
-            'init',
+          return j.objectProperty(
             j.identifier('history'),
             j.callExpression(j.identifier(initializer), [])
           )

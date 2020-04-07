@@ -9,7 +9,7 @@ const addImport = require('../utils/add-import')
 module.exports = function removeContextualH(context) {
   const { j, root } = context
 
-  const renderFns = root.find(j.Property, {
+  const renderFns = root.find(j.ObjectProperty, {
     key: {
       name: 'render'
     },
