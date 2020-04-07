@@ -61,3 +61,5 @@ module.exports = function(fileInfo, api) {
 
   return root.toSource({ lineTerminator: '\n' })
 }
+
+module.exports.parser = 'babylon'
