@@ -16,6 +16,9 @@ module.exports = (api) => {
     prune: true
   })
 
+  const globalAPITransform = require('./codemods/global-api')
+  api.transformScript(api.entryFile, globalAPITransform)
+
   if (api.hasPlugin('eslint')) {
     api.extendPackage({
       devDependencies: {
@@ -52,36 +55,6 @@ module.exports = (api) => {
     })
   }
 
-  if (api.hasPlugin('vuex') || api.generator.pkg.dependencies['vuex']) {
-    api.extendPackage({
-      dependencies: {
-        vuex: '^4.0.0-alpha.1'
-      }
-    })
-
-    api.exitLog('Installed vuex 4.0.')
-    api.exitLog('See the documentation at https://github.com/vuejs/vuex/tree/4.0')
-  }
-
-  if (api.hasPlugin('router') || api.generator.pkg.dependencies['router']) {
-    api.extendPackage({
-      dependencies: {
-        'vue-router': '^4.0.0-alpha.4'
-      }
-    })
-
-    api.exitLog('Installed vue-router 4.0.')
-    api.exitLog('See the documentation at https://github.com/vuejs/vue-router-next')
-    
-    // Notes:
-    // * Catch all routes (`/*`) must now be defined using a parameter with a custom regex: `/:catchAll(.*)`
-    // * `keep-alive` is not yet supported
-    // * Partial support of per-component navigation guards. No `beforeRouteEnter`
-  }
-
-  const globalApiTransform = require('./codemods/global-api')
-  api.transformScript(api.entryFile, globalApiTransform)
-
   const resolveFile = (file) => {
     if (!/\.(j|t)s$/ig.test(file)) {
       file += '.js'
@@ -99,17 +72,43 @@ module.exports = (api) => {
       }
     }
   }
-  
-  const routerPath = resolveFile('src/router')
-  console.log(routerPath)
-  if (routerPath) {
-    api.transformScript(routerPath, globalApiTransform)
-    api.transformScript(routerPath, require('./codemods/router'))
+
+  if (api.hasPlugin('vuex') || api.generator.pkg.dependencies['vuex']) {
+    api.extendPackage({
+      dependencies: {
+        vuex: '^4.0.0-alpha.1'
+      }
+    })
+
+    api.exitLog('Installed vuex 4.0.')
+    api.exitLog('See the documentation at https://github.com/vuejs/vuex/tree/4.0')
+
+    const storePath = resolveFile('src/store')
+    if (storePath) {
+      api.transformScript(storePath, globalAPITransform)
+      api.transformScript(storePath, require('./codemods/vuex'))
+    }
   }
 
-  const storePath = resolveFile('src/store')
-  if (storePath) {
-    api.transformScript(storePath, globalApiTransform)
-    api.transformScript(storePath, require('./codemods/vuex'))
+  if (api.hasPlugin('router') || api.generator.pkg.dependencies['router']) {
+    api.extendPackage({
+      dependencies: {
+        'vue-router': '^4.0.0-alpha.4'
+      }
+    })
+
+    api.exitLog('Installed vue-router 4.0.')
+    api.exitLog('See the documentation at https://github.com/vuejs/vue-router-next')
+
+    const routerPath = resolveFile('src/router')
+    if (routerPath) {
+      api.transformScript(routerPath, globalAPITransform)
+      api.transformScript(routerPath, require('./codemods/router'))
+    }
+    
+    // Notes:
+    // * Catch all routes (`/*`) must now be defined using a parameter with a custom regex: `/:catchAll(.*)`
+    // * `keep-alive` is not yet supported
+    // * Partial support of per-component navigation guards. No `beforeRouteEnter`
   }
 }
