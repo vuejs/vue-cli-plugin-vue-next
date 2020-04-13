@@ -20,4 +20,15 @@ const router = new VueRouter({
   routes
 });
 
+new VueRouter({
+  mode: 'history',
+  routes
+});
+
+new VueRouter({
+  mode: 'history',
+  base: '/foo/',
+  routes
+});
+
 export default router;
