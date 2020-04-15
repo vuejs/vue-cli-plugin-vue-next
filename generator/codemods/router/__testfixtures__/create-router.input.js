@@ -23,9 +23,4 @@ new VueRouter({
   routes
 });
 
-new VueRouter({
-  base: '/foo/',
-  routes
-});
-
 export default router;

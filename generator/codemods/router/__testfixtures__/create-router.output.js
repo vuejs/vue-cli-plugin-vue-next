@@ -24,9 +24,4 @@ createRouter({
   routes
 });
 
-createRouter({
-  history: createWebHashHistory('/foo/'),
-  routes
-});
-
 export default router;
