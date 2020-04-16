@@ -28,32 +28,46 @@ module.exports = function(fileInfo, api) {
     addImport(context, { imported: 'createRouter' }, 'vue-router')
     newVueRouter.replaceWith(({ node }) => {
       // mode: 'history' -> history: createWebHistory(), etc
+      let historyMode = 'createWebHashHistory'
+      let baseValue
       node.arguments[0].properties = node.arguments[0].properties.map(p => {
         if (p.key.name === 'mode') {
           const mode = p.value.value
-          let initializer
           if (mode === 'hash') {
-            initializer = 'createWebHashHistory'
+            historyMode = 'createWebHashHistory'
           } else if (mode === 'history') {
-            initializer = 'createWebHistory'
+            historyMode = 'createWebHistory'
           } else if (mode === 'abstract') {
-            initializer = 'createMemoryHistory'
+            historyMode = 'createMemoryHistory'
           } else {
             console.error(
               `mode must be one of 'hash', 'history', or 'abstract'`
             )
             return p
           }
-
-          addImport(context, { imported: initializer }, 'vue-router')
-          return j.objectProperty(
-            j.identifier('history'),
-            j.callExpression(j.identifier(initializer), [])
-          )
+          return
+        } else if (p.key.name === 'base') {
+          baseValue = p.value
+          return
         }
 
         return p
       })
+
+      // add the default mode with a hash history
+      addImport(context, { imported: historyMode }, 'vue-router')
+      node.arguments[0].properties = node.arguments[0].properties.filter(
+        p => !!p
+      )
+      node.arguments[0].properties.unshift(
+        j.objectProperty(
+          j.identifier('history'),
+          j.callExpression(
+            j.identifier(historyMode),
+            baseValue ? [baseValue] : []
+          )
+        )
+      )
 
       return j.callExpression(j.identifier('createRouter'), node.arguments)
     })

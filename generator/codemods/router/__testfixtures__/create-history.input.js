@@ -20,4 +20,9 @@ const router = new VueRouter({
   routes
 });
 
+new VueRouter({
+  mode: 'history',
+  routes
+});
+
 export default router;
