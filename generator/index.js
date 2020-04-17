@@ -68,7 +68,7 @@ module.exports = (api) => {
     ]
     for (const p of possiblePaths) {
       if (fs.existsSync(p)) {
-        return path.relative(api.resolve('.'), p)
+        return path.relative(api.resolve('.'), p).replace(/\\/g, '/')
       }
     }
   }
