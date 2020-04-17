@@ -1,6 +1,6 @@
 # vue-cli-plugin-vue-next
 
-A Vue CLI plugin for trying out the Vue 3 alpha.
+A Vue CLI plugin for trying out the Vue 3 beta.
 
 This is for preview purposes only. There might be bugs and undocumented behavior differences from v2, which are expected.
 
