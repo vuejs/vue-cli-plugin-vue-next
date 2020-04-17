@@ -81,7 +81,7 @@ module.exports = (api) => {
     })
 
     api.exitLog('Installed vuex 4.0.')
-    api.exitLog('See the documentation at https://github.com/vuejs/vuex/tree/4.0')
+    api.exitLog('Documentation available at https://github.com/vuejs/vuex/tree/4.0')
 
     const storePath = resolveFile('src/store')
     if (storePath) {
@@ -98,7 +98,7 @@ module.exports = (api) => {
     })
 
     api.exitLog('Installed vue-router 4.0.')
-    api.exitLog('See the documentation at https://github.com/vuejs/vue-router-next')
+    api.exitLog('Documentation available at https://github.com/vuejs/vue-router-next')
 
     const routerPath = resolveFile('src/router')
     if (routerPath) {
@@ -110,5 +110,16 @@ module.exports = (api) => {
     // * Catch all routes (`/*`) must now be defined using a parameter with a custom regex: `/:catchAll(.*)`
     // * `keep-alive` is not yet supported
     // * Partial support of per-component navigation guards. No `beforeRouteEnter`
+  }
+
+  if (api.hasPlugin('unit-jest') || api.hasPlugin('unit-mocha')) {
+    api.extendPackage({
+      devDependencies: {
+        '@vue/test-utils': '^2.0.0-alpha.1'
+      }
+    })
+
+    api.exitLog('Installed @vue/test-utils 2.0.')
+    api.exitLog('Documentation available at https://github.com/vuejs/vue-test-utils-next')
   }
 }
