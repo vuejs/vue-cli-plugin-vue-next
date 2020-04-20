@@ -93,7 +93,7 @@ module.exports = (api) => {
   if (api.hasPlugin('router') || api.generator.pkg.dependencies['router']) {
     api.extendPackage({
       dependencies: {
-        'vue-router': '^4.0.0-alpha.5'
+        'vue-router': '^4.0.0-alpha.6'
       }
     })
 
