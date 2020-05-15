@@ -2,6 +2,9 @@ const fs = require('fs')
 const path = require('path')
 
 module.exports = (api) => {
+  // need the CLI to support the `prune` option of `extendPackage`
+  api.assertCliVersion('>= 4.2.3')
+
   api.extendPackage({
     dependencies: {
       vue: '^3.0.0-beta.1'
