@@ -25,7 +25,7 @@ module.exports = (api) => {
   if (api.hasPlugin('eslint')) {
     api.extendPackage({
       devDependencies: {
-        'eslint-plugin-vue': '^7.0.0-alpha.0'
+        'eslint-plugin-vue': 'next'
       }
     })
 
