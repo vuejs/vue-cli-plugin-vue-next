@@ -7,10 +7,10 @@ module.exports = (api) => {
 
   api.extendPackage({
     dependencies: {
-      vue: '^3.0.0-beta.1'
+      vue: '^3.0.0-beta.12'
     },
     devDependencies: {
-      '@vue/compiler-sfc': '^3.0.0-beta.1',
+      '@vue/compiler-sfc': '^3.0.0-beta.12',
       // remove the vue-template-compiler
       'vue-template-compiler': null
     }
