@@ -1,4 +1,11 @@
 module.exports = (api, options) => {
+  try {
+    api.assertVersion('< 4.5.0')
+  } catch (e) {
+    console.warn(`vue-cli-plugin-vue-next is no longer needed for Vue 3 support, please remove it from the dependencies.`)
+    return
+  }
+
   const vueLoaderCacheConfig = api.genCacheConfig('vue-loader', {
     'vue-loader': require('vue-loader/package.json').version,
     '@vue/compiler-sfc': require('@vue/compiler-sfc/package.json').version
@@ -10,7 +17,7 @@ module.exports = (api, options) => {
         'vue$',
         options.runtimeCompiler
           ? 'vue/dist/vue.esm-bundler.js'
-          : '@vue/runtime-dom'
+          : 'vue/dist/vue.runtime.esm-bundler.js'
       )
 
     config.module
