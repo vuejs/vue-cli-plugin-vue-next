@@ -22,5 +22,18 @@ module.exports = function removeVueUse({ j, root }) {
       }
     }
   })
-  vueUseCalls.remove()
+
+  const removablePlugins = ['VueRouter', 'Vuex']
+  const removableUseCalls = vueUseCalls.filter(({ node }) => {
+    if (j.Identifier.check(node.arguments[0])) {
+      const plugin = node.arguments[0].name
+      if (removablePlugins.includes(plugin)) {
+        return true
+      }
+    }
+
+    return false
+  })
+
+  removableUseCalls.remove()
 }
