@@ -1,8 +1,11 @@
+const chalk = require('chalk')
+
 module.exports = (api, options) => {
   try {
     api.assertVersion('< 4.5.0')
   } catch (e) {
-    console.warn(`vue-cli-plugin-vue-next is no longer needed for Vue 3 support, please remove it from the dependencies.`)
+    console.warn(chalk.red(`Vue CLI now supports Vue 3 by default.`))
+    console.warn(chalk.red(`vue-cli-plugin-vue-next is no longer needed, please remove it from the dependencies.`))
     return
   }
 

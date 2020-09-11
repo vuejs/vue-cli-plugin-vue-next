@@ -13,6 +13,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "vue-loader": "^16.0.0-alpha.3"
   },
   "peerDependencies": {
