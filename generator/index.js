@@ -22,6 +22,14 @@ module.exports = (api) => {
   const globalAPITransform = require('./codemods/global-api')
   api.transformScript(api.entryFile, globalAPITransform)
 
+  const vueTransform = require('./codemods/vue')
+  const vueFiles = Object.keys(api.generator.files).filter(el =>
+    el.endsWith('.vue')
+  )
+  for (let i = 0; i < vueFiles.length; i++) {
+    api.transformScript(vueFiles[i], vueTransform)
+  }
+
   if (api.hasPlugin('eslint')) {
     api.extendPackage({
       devDependencies: {
