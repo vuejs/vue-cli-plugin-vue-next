@@ -5,6 +5,7 @@ module.exports = function(fileInfo, api) {
   const context = { j, root }
 
   require('./add-emit-declaration')(context)
+  require('./add-watch-deep')(context)
 
   return root.toSource({ lineTerminator: '\n' })
 }
