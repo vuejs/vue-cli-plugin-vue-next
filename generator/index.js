@@ -134,3 +134,15 @@ module.exports = (api) => {
     api.exitLog('Documentation available at https://github.com/vuejs/vue-test-utils-next')
   }
 }
+
+module.exports.hooks = api => {
+  api.postProcessFiles(files => {
+    const vueTransform = require('./codemods/vue-addition')
+    const vueFiles = Object.keys(api.generator.files).filter(el =>
+      el.endsWith('.vue')
+    )
+    for (let i = 0; i < vueFiles.length; i++) {
+      vueTransform(files, vueFiles[i])
+    }
+  })
+}
