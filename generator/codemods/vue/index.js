@@ -7,6 +7,7 @@ module.exports = function(fileInfo, api) {
   require('./add-emit-declaration')(context)
   require('./add-watch-deep')(context)
   require('./rename-lifecycle')(context)
+  require('./vModel')(context)
 
   return root.toSource({ lineTerminator: '\n' })
 }
