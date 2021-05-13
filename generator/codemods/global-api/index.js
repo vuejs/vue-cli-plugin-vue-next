@@ -14,6 +14,7 @@ module.exports = function(fileInfo, api) {
   require('./next-tick')(context)
   require('./observable')(context)
   require('./version')(context)
+  require('./global-filter')(context)
 
   // remove extraneous imports
   const removeExtraneousImport = require('../utils/remove-extraneous-import')
