@@ -3,6 +3,7 @@ import App from './App.vue';
 import store from './store';
 import anotherStore from './another-store';
 
-createApp(App).use(store).mount('#app');
-
-createApp(App).use(anotherStore).mount('#app');
+const app = createApp({}).use(h => h(App));
+app.mount('#app');
+const app = createApp({}).use(h => h(App));
+app.mount('#app');

@@ -11,6 +11,10 @@ module.exports = function(fileInfo, api) {
   require('./remove-production-tip')(context)
   require('./remove-vue-use')(context)
   require('./remove-contextual-h')(context)
+  require('./next-tick')(context)
+  require('./observable')(context)
+  require('./version')(context)
+  require('./global-filter')(context)
 
   // remove extraneous imports
   const removeExtraneousImport = require('../utils/remove-extraneous-import')
